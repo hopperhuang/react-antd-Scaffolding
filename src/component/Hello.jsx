@@ -6,6 +6,9 @@ class Hello extends React.Component {
     super(props);
     this.state = { hello: 'hello' };
   }
+  componentWillMount() {
+    this.setState({ hello: 'abc' });
+  }
   render() {
     const hello = this.state.hello;
     return (
