@@ -102,7 +102,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       // // 定义模板 和 生成的 html 文件
       template: './src/template/index.html',
-      // 定义了输出路径。
+      // 定义了输出路径，这里的相对路径和绝对路径都基于out.path。
       filename: './index.html',
       favicon: './src/images/icon_qq.png',
     }),
