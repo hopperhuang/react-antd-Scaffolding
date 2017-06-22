@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const Merge = require('webpack-merge');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 // path 需要是一个绝对路径
 // const ExtractTextPlugin = require('extract-text-webpack-plugin');
 // const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -69,6 +70,17 @@ module.exports = Merge(CommonConfig, {
         // 开发环境时，将环境变量设置为development
         NODE_ENV: JSON.stringify('development'),
       },
+    }),
+    new HtmlWebpackPlugin({
+      // // 定义模板 和 生成的 html 文件
+      // 定义了模板路径，这个路径时相对于context上下文的。
+      template: './src/template/index.html',
+      // 定义了输出路径，这里的相对路径和绝对路径都基于out.path。
+      // 这里的Out.path时dist文件夹,sever会基于这文件夹啊去提供服务，在devServer里面定义了
+      // 所以我们需要件html文件生成到这个文件夹。
+      filename: './index.html',
+      // filename: './dist/index.html',
+      favicon: './src/images/icon_qq.png',
     }),
   ],
 });

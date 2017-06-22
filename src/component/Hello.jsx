@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from 'antd';
+import QQimage from '../images/icon_qq.png';
 
 class Hello extends React.Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class Hello extends React.Component {
       <div className="red">
         {hello}
         <Button className="test_button" type="primary">Primary</Button>
+        <img src={QQimage} alt="" />
       </div>
     );
   }

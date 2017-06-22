@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
 const WebpackChunkHash = require('webpack-chunk-hash');
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CommonConfig = require('./webpack.common.js');
 
 module.exports = Merge(CommonConfig, {
@@ -10,7 +11,8 @@ module.exports = Merge(CommonConfig, {
     app: './src/index.jsx',
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    // 将文件输出到dist/assets/ 目录下
+    path: path.resolve(__dirname, 'dist/assets/'),
     // 出口文件，以entry的Key来命名。
     // filename: '[name].js',
     // 为每个文件生成唯一的哈希值，当依赖没有更新时，只更新应用代码，不更新公共代码库。即vendor文件。
@@ -19,8 +21,9 @@ module.exports = Merge(CommonConfig, {
     // run-time文件命名方法。
     chunkFilename: '[name].[chunkhash].js',
     // chunkhash只能用再生产环境，用于缓存代码。
-    // 生产环境下，只有再需要特工缓存的情况下，才配置publicPath
-    // publicPath: '/'
+    // 生产环境下，只有再需要特工缓存的情况下，才配置publicPath,将文件输出到
+    // 在所有url前加上assets路径前缀
+    publicPath: 'assets/',
   },
   devtool: 'inline-source-map',
   plugins: [
@@ -74,6 +77,16 @@ module.exports = Merge(CommonConfig, {
         warnings: false,
       },
       comments: false,
+    }),
+    new HtmlWebpackPlugin({
+      // // 定义模板 和 生成的 html 文件
+      template: './src/template/index.html',
+      // 定义了输出路径，这里的相对路径和绝对路径都基于out.path。
+      // 基于dist/assets 路径，我们要将html文件生成到dist,其他文件生成到dist/assets,
+      // 所以要返回上一层。
+      filename: '../index.html',
+      // filename: './dist/index.html',
+      favicon: './src/images/icon_qq.png',
     }),
   ],
 });

@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 // path 需要是一个绝对路径
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const extractCSS = new ExtractTextPlugin('stylesheets/[name]-one.css');
 const extractLESS = new ExtractTextPlugin('stylesheets/[name]-two.css');
@@ -99,12 +99,13 @@ module.exports = {
       name: 'manifest',
       minChunks: Infinity,
     }),
-    new HtmlWebpackPlugin({
-      // // 定义模板 和 生成的 html 文件
-      template: './src/template/index.html',
-      // 定义了输出路径，这里的相对路径和绝对路径都基于out.path。
-      filename: './index.html',
-      favicon: './src/images/icon_qq.png',
-    }),
+    // new HtmlWebpackPlugin({
+    //   // // 定义模板 和 生成的 html 文件
+    //   template: './src/template/index.html',
+    //   // 定义了输出路径，这里的相对路径和绝对路径都基于out.path。
+    //   filename: '../index.html',
+    //   // filename: './dist/index.html',
+    //   favicon: './src/images/icon_qq.png',
+    // }),
   ],
 };
