@@ -6,7 +6,7 @@
   "scripts": {
     "test": "set NODE_ENV=test&&mocha",
     "start": "set NODE_ENV=development&&webpack-dev-server --env=development ",
-    "build": "webpack --env=production --progress --profile --colors"
+    "build": "rimraf dist&&webpack --env=production --progress --profile --colors"
   },
   "author": "hopperhuang",
   "license": "ISC",
