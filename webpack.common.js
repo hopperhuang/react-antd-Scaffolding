@@ -66,7 +66,10 @@ module.exports = {
       {
         test: /\.(png|svg|jpg|gif)$/,
         use: [
-          'file-loader',
+          // 这里的outputPath时基于 output中的out.pathu路径的，我们要将
+          // 文件输出到dist/assets/images/文件夹，所以要将路径做如下设置。
+          // 具体设置可以看file-loader
+          'file-loader?name=[name].[ext]&outputPath=images/',
         ],
       },
       // 读取字体

@@ -15,6 +15,7 @@ class Hello extends React.Component {
     return (
       <div className="red">
         {hello}
+        ddddd
         <Button className="test_button" type="primary">Primary</Button>
         <img src={QQimage} alt="" />
       </div>
