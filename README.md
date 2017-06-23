@@ -3,7 +3,8 @@
 采用react, antd, webpack, mocha, 快速启动react项目脚手架。
 
 已解决问题：
-通过common/RetinaImage.jsx组件解决根据不同dpr加载不同分辨率图片的问题。
+
+1. 通过common/RetinaImage.jsx组件解决根据不同dpr加载不同分辨率图片的问题。
 
 待解决问题：
 
