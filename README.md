@@ -2,6 +2,9 @@
 
 采用react, antd, webpack, mocha, 快速启动react项目脚手架。
 
+已解决问题：
+通过common/RetinaImage.jsx组件解决根据不同dpr加载不同分辨率图片的问题。
+
 待解决问题：
 
 1. mock数据测试(在webpack-dev-server配置中，添加proxy选项，具体看webpack api, 开发时再具体解决。)
