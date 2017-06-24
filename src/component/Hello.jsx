@@ -1,48 +1,30 @@
 import React from 'react';
-import { Button } from 'antd';
-import RetinaImage from './common/RetinaImage';
-import QQimage from '../images/icon_qq.png';
-import '../images/icon_qq@2x.png';
-import '../images/icon_qq@3x.png';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from '../config/store';
+import Bike from './Bike';
+import Car from './Car';
+import World from './World';
 
-class Hello extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      hello: 'hello',
-      src: QQimage,
-      showImage: true,
-    };
-    this.onClickHandler = this.onClickHandler.bind(this);
-  }
-  componentWillMount() {
-    this.setState({ hello: 'abc' });
-  }
-  onClickHandler() {
-    const showImage = this.state.showImage;
-    this.setState({
-      showImage: !showImage,
-    });
-  }
-  render() {
-    const hello = this.state.hello;
-    const src = this.state.src;
-    const img = this.state.showImage ? <RetinaImage src={src} /> : '';
-    return (
-      <div className="red">
-        {hello}
-        ddddd
-        <Button
-          className="test_button"
-          type="primary"
-          onClick={this.onClickHandler}
-        >
-          primary
-        </Button>
-        {img}
-      </div>
-    );
-  }
-}
+
+const Hello = function Hello() {
+  return (
+    <Provider store={store}>
+      <Router>
+        <div>
+          <ul>
+            <li><Link to="/Bike">Bike</Link></li>
+            <li><Link to="/Car">Car</Link></li>
+            <li><Link to="/World">World</Link></li>
+          </ul>
+          <hr />
+          <Route path="/Bike" component={Bike} />
+          <Route path="/Car" component={Car} />
+          <Route path="/World" component={World} />
+        </div>
+      </Router>
+    </Provider>
+  );
+};
 
 export default Hello;

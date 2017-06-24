@@ -59,6 +59,8 @@ module.exports = Merge(CommonConfig, {
     // 和上文 output 的“publicPath”值保持一致，因为output.publicPath
     // 已经定义好了静态资源的访问入口，所以要想访问生成的静态资源，必须从这个入口进入。
     publicPath: '/',
+    // 用于处理开发过程中，进入子路由的问题。
+    historyApiFallback: true,
   },
   plugins: [
     // 开启全局的模块热替换(HMR)
