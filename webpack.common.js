@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const path = require('path');
 // path 需要是一个绝对路径
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 // const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -10,6 +11,15 @@ module.exports = {
   context: __dirname,
   resolve: { // 于解释缺乏后缀名的文件
     extensions: ['.js', '.less', '.json', '.jsx'],
+    // 明确公共文件库中的一些别名。
+    alias: {
+      react: path.resolve(__dirname, 'node_modules/react'),
+      'react-dom': path.resolve(__dirname, 'node_modules/react-dom'),
+      redux: path.resolve(__dirname, 'node_modules/redux'),
+      'react-redux': path.resolve(__dirname, 'node_modules/react-redux'),
+      'redux-saga': path.resolve(__dirname, 'node_modules/redux-saga'),
+      'react-router-dom': path.resolve(__dirname, 'node_modules/react-router-dom'),
+    },
   },
   module: {
     rules: [

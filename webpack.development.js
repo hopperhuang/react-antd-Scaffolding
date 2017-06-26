@@ -83,6 +83,7 @@ module.exports = Merge(CommonConfig, {
       filename: './index.html',
       // filename: './dist/index.html',
       favicon: './src/images/icon_qq.png',
+      // chunksSortMode: 'dependency',
     }),
   ],
 });
