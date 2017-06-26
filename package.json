@@ -6,7 +6,8 @@
   "scripts": {
     "test": "set NODE_ENV=test&&mocha",
     "start": "rimraf dist&&set NODE_ENV=development&&webpack-dev-server --env=development ",
-    "build": "rimraf dist&&webpack --env=production --progress --profile --colors"
+    "build": "rimraf dist&&webpack --env=production --progress --profile --colors",
+    "server": "node server.js"
   },
   "author": "hopperhuang",
   "license": "ISC",
@@ -69,6 +70,7 @@
   "dependencies": {
     "antd": "^2.11.0",
     "babel-polyfill": "^6.23.0",
+    "express": "^4.15.3",
     "prop-types": "^15.5.10",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",

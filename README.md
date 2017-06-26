@@ -6,6 +6,7 @@
 
 1. 通过common/RetinaImage.jsx组件解决根据不同dpr加载不同分辨率图片的问题。
 2. 打包后文件出现apply is undefined的问题,为题出现再store.jsx createStore方法, compose.js中，具体解决方法见config/store.jsx
+3. 增加了express服务器框架，可以模拟测试页面再生产环境下的状态。(再启动sever之前，请确保dist文件已打包)
 
 待解决问题：
 

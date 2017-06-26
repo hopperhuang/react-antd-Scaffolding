@@ -22,8 +22,9 @@ module.exports = Merge(CommonConfig, {
     chunkFilename: '[name].[chunkhash].js',
     // chunkhash只能用再生产环境，用于缓存代码。
     // 生产环境下，只有再需要特工缓存的情况下，才配置publicPath,将文件输出到
-    // 在所有url前加上assets路径前缀
-    publicPath: 'assets/',
+    // 在所有url前加上/assets/路径前缀直接加载localhost下的assets,访问localhost:3000/assets/
+    // 建议结合sever.js中的app.use(express.static('dist'));一起来理解。
+    publicPath: '/assets/',
   },
   devtool: 'inline-source-map',
   plugins: [
