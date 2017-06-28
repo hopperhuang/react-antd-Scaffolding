@@ -14,7 +14,7 @@ const Hello = function Hello() {
         <div>
           <ul>
             <li><Link to="/Bike">Bike</Link></li>
-            <li><Link to="/Car">Car</Link></li>
+            <li><Link to="/Car">Carrrrrr</Link></li>
             <li><Link to="/World">World</Link></li>
           </ul>
           <hr />
