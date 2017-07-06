@@ -6,7 +6,6 @@ import Bike from './Bike';
 import Car from './Car';
 import World from './World';
 
-
 const Hello = function Hello() {
   return (
     <Provider store={store}>
