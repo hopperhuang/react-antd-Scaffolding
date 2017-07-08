@@ -1,10 +1,15 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import store from '../config/store';
 import Bike from './Bike';
 import Car from './Car';
 import World from './World';
+import simplify from '../config/simplify';
+import BikeModels from '../models/BikeModels';
+
+const app = simplify();
+app.model(BikeModels);
+const store = app.run();
 
 const Hello = function Hello() {
   return (

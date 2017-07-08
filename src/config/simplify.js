@@ -1,4 +1,4 @@
-
+import 'babel-polyfill';
 import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware, { takeEvery } from 'redux-saga';
 import { fork } from 'redux-saga/effects';
@@ -58,7 +58,7 @@ const simplify = function simplify() {
       for (let publicSagasKeysIndex = 0;
         publicSagasKeysIndex < publicSagasKeys.length; publicSagasKeysIndex += 1) {
         const publicSagasKey = publicSagasKeys[publicSagasKeysIndex];
-        const publicSaga = publicSagasKeys[publicSagasKey];
+        const publicSaga = publicSagas[publicSagasKey];
         // fork 每个publicSaga
         yield fork(function* watcher() {
           // 根据identifier和publicSagasKey来takeEvery，监听action,
