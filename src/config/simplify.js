@@ -59,6 +59,7 @@ const simplify = function simplify() {
         publicSagasKeysIndex < publicSagasKeys.length; publicSagasKeysIndex += 1) {
         const publicSagasKey = publicSagasKeys[publicSagasKeysIndex];
         const publicSaga = publicSagas[publicSagasKey];
+        console.log(`${identifier}-${publicSagasKey}`);
         // fork 每个publicSaga
         yield fork(function* watcher() {
           // 根据identifier和publicSagasKey来takeEvery，监听action,
