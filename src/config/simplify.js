@@ -2,6 +2,8 @@ import 'babel-polyfill';
 import { createStore, applyMiddleware, compose } from 'redux';
 import createSagaMiddleware, { takeEvery } from 'redux-saga';
 import { fork } from 'redux-saga/effects';
+import update from 'immutability-helper';
+import deepcopy from 'deepcopy';
 
 const simplify = function simplify() {
   const simplifier = {};
@@ -10,6 +12,7 @@ const simplify = function simplify() {
   const sagas = [];
   // 不用combineReducer的方法，生成一個聚合各個reducer后的reducer
   function mainReducer(state = mainState, action) {
+    console.log(state);
     // 取出identifier 和 type 定位subState 和相應的subReducer
     const { identifier, type } = action;
     // 初始化的時候mainReducer可以生成第一個reducer
@@ -31,7 +34,10 @@ const simplify = function simplify() {
     const subReducer = mainReducerCollection[identifier][type];
     // subReducer的處理結果, 生成新的state
     const newSubState = subReducer(subState, action);
-    const newState = Object.assign(state, newSubState);
+    // console.log(newSubState);
+    const newState = deepcopy(state);
+    newState[identifier] = newSubState;
+    // console.log(newState);
     return newState;
   }
   function model(newModel) {
@@ -59,7 +65,6 @@ const simplify = function simplify() {
         publicSagasKeysIndex < publicSagasKeys.length; publicSagasKeysIndex += 1) {
         const publicSagasKey = publicSagasKeys[publicSagasKeysIndex];
         const publicSaga = publicSagas[publicSagasKey];
-        console.log(`${identifier}-${publicSagasKey}`);
         // fork 每个publicSaga
         yield fork(function* watcher() {
           // 根据identifier和publicSagasKey来takeEvery，监听action,
