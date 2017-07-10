@@ -1,44 +1,26 @@
 import 'babel-polyfill';
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import createSagaMiddleware, { takeEvery } from 'redux-saga';
 import { fork } from 'redux-saga/effects';
-import update from 'immutability-helper';
-import deepcopy from 'deepcopy';
+// import update from 'immutability-helper';
+// import deepcopy from 'deepcopy';
 
 const simplify = function simplify() {
   const simplifier = {};
   const mainState = {};
   const mainReducerCollection = {};
   const sagas = [];
-  // 不用combineReducer的方法，生成一個聚合各個reducer后的reducer
-  function mainReducer(state = mainState, action) {
-    console.log(state);
-    // 取出identifier 和 type 定位subState 和相應的subReducer
-    const { identifier, type } = action;
-    // 初始化的時候mainReducer可以生成第一個reducer
-    if (!type) {
-      // 類型不存在則返回默認的state
-      return state;
-    }
-    // 用於判斷外部disptach方法中, identifier屬性是否存在，不存在則報錯，並返回原來的statea
-    if (!identifier) {
-      return state;
-    }
-    // 獲取subState
-    const subState = mainState[identifier];
-    if (!subState) {
-      // 如果想要操作的subState不能存在，則報錯
-      return state;
-    }
-    // 後去subReducer
-    const subReducer = mainReducerCollection[identifier][type];
-    // subReducer的處理結果, 生成新的state
-    const newSubState = subReducer(subState, action);
-    // console.log(newSubState);
-    const newState = deepcopy(state);
-    newState[identifier] = newSubState;
-    // console.log(newState);
-    return newState;
+  function makeReducer(State, Identifier, reducers) {
+    return (state = State, action) => {
+      const { identifier, type } = action;
+      if (!identifier) {
+        return state;
+      }
+      if (identifier !== Identifier) {
+        return state;
+      }
+      return reducers[type] ? reducers[type](state, type) : state;
+    };
   }
   function model(newModel) {
     const { state, reducers, effects, identifier } = newModel;
@@ -50,12 +32,7 @@ const simplify = function simplify() {
     // 将Model里面的state房东mainState里面。
     mainState[identifier] = state;
     // 根據reducers的key值，和identifier屬性，將reducer按照key分類，添加到mainReducerCollection裏面
-    mainReducerCollection[identifier] = {};
-    const reducersKeys = Object.keys(reducers);
-    for (let index = 0; index < reducersKeys.length; index += 1) {
-      const reducerKey = reducersKeys[index];
-      mainReducerCollection[identifier][reducerKey] = reducers[reducerKey];
-    }
+    mainReducerCollection[identifier] = makeReducer(state, identifier, reducers);
     // 将公共sagas 和 私有sagas进行分类
     const { publicSagas, privateSagas } = effects;
     const publicSagasKeys = Object.keys(publicSagas);
@@ -79,12 +56,12 @@ const simplify = function simplify() {
   function run() {
     const sagaMiddleware = createSagaMiddleware();
     const store = process.env.NODE_ENV === 'development' ? createStore(
-        mainReducer,
+        combineReducers(mainReducerCollection),
         compose(applyMiddleware(sagaMiddleware),
           window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
         ),
     ) : createStore(
-        mainReducer,
+        combineReducers(mainReducerCollection),
         // 打包模式下，不能加入插件，否则会报错。
         applyMiddleware(sagaMiddleware),
     );

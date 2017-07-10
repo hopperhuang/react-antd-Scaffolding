@@ -22,7 +22,6 @@ const BikeModels = {
   },
   reducers: {
     oneMore(state) {
-      console.log(state);
       let { number } = state;
       number += 1;
       const newState = update(state, { number: { $set: number } });
