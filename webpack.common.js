@@ -4,6 +4,7 @@ const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 // const HtmlWebpackPlugin = require('html-webpack-plugin');
 const autoprefixer = require('autoprefixer');
+const postcssPxtorem = require('postcss-pxtorem');
 
 const extractCSS = new ExtractTextPlugin('stylesheets/[name]-one.css');
 const extractLESS = new ExtractTextPlugin('stylesheets/[name]-two.css');
@@ -42,6 +43,15 @@ module.exports = {
               options: {
                 plugins: [
                   autoprefixer,
+                  postcssPxtorem({
+                    rootValue: 20,
+                    unitPrecision: 5,
+                    propList: ['*'],
+                    selectorBlackList: [],
+                    replace: true,
+                    mediaQuery: false,
+                    minPixelValue: 2,
+                  }),
                 ],
               },
             },
