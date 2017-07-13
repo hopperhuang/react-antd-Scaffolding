@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Route, Link } from 'react-router-dom';
 import RedBike from './RedBike';
 import MakeMenu from '../utils/MakeMenu';
@@ -46,14 +45,3 @@ const Bike = function Bike(props) {
   );
 };
 export default Bike;
-
-
-Bike.propTypes = {
-  match: PropTypes.shape({
-    isExact: PropTypes.bool,
-    params: PropTypes.object,
-    path: PropTypes.string,
-    url: PropTypes.string,
-    __proto__: PropTypes.object,
-  }).isRequired,
-};
