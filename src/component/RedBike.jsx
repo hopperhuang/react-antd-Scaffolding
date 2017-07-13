@@ -9,7 +9,9 @@ const RedBike = function RedBike(props) {
     <div>
       <h1>this is red Bike</h1>
       <Button onClick={() => dispatch({ type: 'bike-addNumber' })}>Click me add numbers</Button>
-      { bike.number }
+      <div className="red_bike_number">
+        { bike.number }
+      </div>
     </div>
   );
 };

@@ -3,6 +3,7 @@ const path = require('path');
 // path 需要是一个绝对路径
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 // const HtmlWebpackPlugin = require('html-webpack-plugin');
+const autoprefixer = require('autoprefixer');
 
 const extractCSS = new ExtractTextPlugin('stylesheets/[name]-one.css');
 const extractLESS = new ExtractTextPlugin('stylesheets/[name]-two.css');
@@ -36,6 +37,14 @@ module.exports = {
           fallback: 'style-loader',
           use: [
             'css-loader',
+            {
+              loader: 'postcss-loader',
+              options: {
+                plugins: [
+                  autoprefixer,
+                ],
+              },
+            },
             'less-loader',
           ],
         }),

@@ -6,6 +6,7 @@ import Car from './Car';
 import World from './World';
 import simplify from '../config/simplify';
 import BikeModels from '../models/BikeModels';
+import '../style/style.less';
 
 const app = simplify();
 app.model(BikeModels);
