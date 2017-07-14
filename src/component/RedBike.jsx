@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Button } from 'antd';
 
 const RedBike = function RedBike(props) {
+  console.log(props);
   const { dispatch, bike } = props;
   return (
     <div>
