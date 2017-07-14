@@ -10,6 +10,7 @@
 4. 增加了auto-prefixer可以为css自动添加前缀。
 5. 增加了rem.less和postcss-loader，用于自动对less文件中的px单位，自动转换为rem单位。
 6. 增加了代码分离分离方案，减少入口文件打包大小，动态加载展示组件，用bundle.js生成一个可以动态加载的Component,结合bundle-loader使用。
+7. 修复了manifest中的运行时代码无法内联插入到html中的问题,修复了打包文件无法实现动态加载的问题。
 
 待解决问题：
 
