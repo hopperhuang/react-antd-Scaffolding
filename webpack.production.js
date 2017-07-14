@@ -1,7 +1,8 @@
 const Merge = require('webpack-merge');
 const webpack = require('webpack');
-const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
+// const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
 const WebpackChunkHash = require('webpack-chunk-hash');
+const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CommonConfig = require('./webpack.common.js');
@@ -48,16 +49,20 @@ module.exports = Merge(CommonConfig, {
     new WebpackChunkHash(),
     // 使用 ChunkManifestWebpackPlugin，它会将 manifest 提取到一个单独的 JSON 文件中。
     // 这将用一个 webpack runtime 的变量替换掉chunk manifest。
-    new ChunkManifestPlugin({
-      filename: 'chunk-manifest.json',
-      manifestVariable: 'webpackManifest',
-      // 因为我们从入口块(entry chunk)中移除了 manifest，所以我们现在有责任为 webpack 提供它。
-      // <![CDATA[
-      // window.webpackManifest =
-      // {"0":"main.5f020f80c23aa50ebedf.js","1":"vendor.81adc64d405c8b218485.js"}
-    // ]]>
-    // 将inlineManifest设置为true,内联插入变量。
-      inlineManifest: true,
+    // new ChunkManifestPlugin({
+    //   filename: 'chunk-manifest.json',
+    //   manifestVariable: 'webpackManifest',
+    //   // 因为我们从入口块(entry chunk)中移除了 manifest，所以我们现在有责任为 webpack 提供它。
+    //   // <![CDATA[
+    //   // window.webpackManifest =
+    //   // {"0":"main.5f020f80c23aa50ebedf.js","1":"vendor.81adc64d405c8b218485.js"}
+    // // ]]>
+    // // 将inlineManifest设置为true,内联插入变量。
+    //   inlineManifest: true,
+    // }),
+    // 将manifest生成的运行代码内联插入到html中，减少请求，同时修复无法动态加载组件的问题。
+    new InlineManifestWebpackPlugin({
+      name: 'webpackManifest',
     }),
     new webpack.optimize.UglifyJsPlugin({
       beautify: false,
@@ -81,7 +86,7 @@ module.exports = Merge(CommonConfig, {
     }),
     new HtmlWebpackPlugin({
       // // 定义模板 和 生成的 html 文件
-      template: './src/template/index.html',
+      template: './src/template/index.ejs',
       // 定义了输出路径，这里的相对路径和绝对路径都基于out.path。
       // 基于dist/assets 路径，我们要将html文件生成到dist,其他文件生成到dist/assets,
       // 所以要返回上一层。

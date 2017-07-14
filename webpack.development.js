@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 const Merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin');
 // path 需要是一个绝对路径
 // const ExtractTextPlugin = require('extract-text-webpack-plugin');
 // const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -73,10 +74,14 @@ module.exports = Merge(CommonConfig, {
         NODE_ENV: JSON.stringify('development'),
       },
     }),
+    // 将manifest生成的运行代码内联插入到html中，减少请求，同时修复无法动态加载组件的问题。
+    new InlineManifestWebpackPlugin({
+      name: 'webpackManifest',
+    }),
     new HtmlWebpackPlugin({
       // // 定义模板 和 生成的 html 文件
       // 定义了模板路径，这个路径时相对于context上下文的。
-      template: './src/template/index.html',
+      template: './src/template/index.ejs',
       // 定义了输出路径，这里的相对路径和绝对路径都基于out.path。
       // 这里的Out.path时dist文件夹,sever会基于这文件夹啊去提供服务，在devServer里面定义了
       // 所以我们需要件html文件生成到这个文件夹。
