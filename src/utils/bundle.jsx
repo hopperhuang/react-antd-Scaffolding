@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 
 class Bundle extends Component {
   constructor(props) {
@@ -30,4 +30,15 @@ class Bundle extends Component {
   }
 }
 
-export default Bundle;
+function MakeAsyncComponent(bundleLoaderComponent) {
+  return function AsyncComponent() {
+    return (
+      <Bundle load={bundleLoaderComponent}>
+        {Asyncmodule => <Asyncmodule />}
+      </Bundle>
+    );
+  };
+}
+
+
+export default MakeAsyncComponent;

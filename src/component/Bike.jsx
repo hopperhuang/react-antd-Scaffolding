@@ -4,15 +4,7 @@ import React from 'react';
 import { Route, Link } from 'react-router-dom';
 import RedBike from 'bundle-loader?lazy!./RedBike';
 import MakeMenu from '../utils/MakeMenu';
-import Bundle from '../utils/bundle';
-
-const LazyRedBike = function LazyRedBike() {
-  return (
-    <Bundle load={RedBike}>
-      {Component => <Component />}
-    </Bundle>
-  );
-};
+import MakeAsyncComponent from '../utils/bundle';
 
 const testData = [
   {
@@ -53,7 +45,7 @@ const Bike = function Bike(props) {
       {MakeMenu(testData)}
       <Link to={`${url}/redBike`}>clikck here, go to redBike</Link>
       <hr />
-      <Route path={`${url}/redBike`} component={LazyRedBike} />
+      <Route path={`${url}/redBike`} component={MakeAsyncComponent(RedBike)} />
     </div>
   );
 };

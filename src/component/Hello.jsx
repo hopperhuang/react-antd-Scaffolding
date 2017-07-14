@@ -1,11 +1,14 @@
+/* eslint import/no-unresolved: 0*/
+/* eslint import/extensions: 0*/
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import Car from 'bundle-loader?lazy!./Car';
+import World from 'bundle-loader?lazy!./World';
 import Bike from './Bike';
-import Car from './Car';
-import World from './World';
 import simplify from '../config/simplify';
 import BikeModels from '../models/BikeModels';
+import MakeAsyncComponent from '../utils/bundle';
 import '../style/style.less';
 
 const app = simplify();
@@ -24,8 +27,8 @@ const Hello = function Hello() {
           </ul>
           <hr />
           <Route path="/Bike" component={Bike} />
-          <Route path="/Car" component={Car} />
-          <Route path="/World" component={World} />
+          <Route path="/Car" component={MakeAsyncComponent(Car)} />
+          <Route path="/World" component={MakeAsyncComponent(World)} />
         </div>
       </Router>
     </Provider>
