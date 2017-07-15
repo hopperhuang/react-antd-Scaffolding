@@ -18,6 +18,9 @@ import React, { Component } from 'react';
 //
 // componentWillReceiveProps方法被触发，是因为props里面的路由属性改变所引起的。
 // 这个组件内的componentWillReceiveProps方法的促发，因为，它被withRouter方法包裹了一层，包含了路由的相关属性。
+//
+// 路游级组件的变化，通常会由路由相关属性的变化引起。特别时url的变化，会到只props滨化，引起re-render。子路由的路由属性变化，会引起上级
+// 路由属性的变化。
 
 class Bundle extends Component {
   constructor(props) {
