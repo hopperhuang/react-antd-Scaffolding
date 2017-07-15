@@ -1,7 +1,8 @@
 /* eslint import/no-unresolved: 0*/
 /* eslint import/extensions: 0*/
 import React from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route, Link, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import RedBike from 'bundle-loader?lazy!./RedBike';
 import MakeMenu from '../utils/MakeMenu';
 import MakeAsyncComponent from '../utils/bundle';
@@ -40,13 +41,15 @@ const testData = [
 const Bike = function Bike(props) {
   // 匹配上一级的url来产生子路由。
   const url = props.match.url;
+  const { bike } = props;
   return (
     <div>
       {MakeMenu(testData)}
       <Link to={`${url}/redBike`}>clikck here, go to redBike</Link>
+      {bike.number}
       <hr />
       <Route path={`${url}/redBike`} component={MakeAsyncComponent(RedBike)} />
     </div>
   );
 };
-export default Bike;
+export default withRouter(connect(state => ({ bike: state.bike }))(Bike));

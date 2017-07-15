@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Button } from 'antd';
+import { withRouter } from 'react-router-dom';
 
 const RedBike = function RedBike(props) {
-  console.log(props);
   const { dispatch, bike } = props;
   return (
     <div>
@@ -21,9 +21,7 @@ RedBike.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
-const RedBikeContainer = connect(state =>
-  ({ bike: state.bike }))(RedBike);
-
+const RedBikeContainer = withRouter(connect(state => ({ bike: state.bike }))(RedBike));
 export default RedBikeContainer;
 
 // dispatch({ type: 'addNumber', payload: 1 })
