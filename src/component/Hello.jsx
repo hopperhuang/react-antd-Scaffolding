@@ -17,6 +17,10 @@ const app = simplify();
 app.model(BikeModels);
 const store = app.run();
 
+const AsyncBike = MakeAsyncComponent(Bike);
+const AsyncCar = MakeAsyncComponent(Car);
+const AsyncWorld = MakeAsyncComponent(World);
+
 const Hello = function Hello() {
   return (
     <Provider store={store}>
@@ -29,9 +33,9 @@ const Hello = function Hello() {
             <li><Link to="/Football"><Button>football</Button></Link></li>
           </ul>
           <hr />
-          <Route path="/Bike" component={MakeAsyncComponent(Bike)} />
-          <Route path="/Car" component={MakeAsyncComponent(Car)} />
-          <Route path="/World" component={MakeAsyncComponent(World)} />
+          <Route path="/Bike" component={AsyncBike} />
+          <Route path="/Car" component={AsyncCar} />
+          <Route path="/World" component={AsyncWorld} />
           <Route path="/Football" component={Football} />
         </div>
       </Router>

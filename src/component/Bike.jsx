@@ -7,6 +7,7 @@ import RedBike from 'bundle-loader?lazy!./RedBike';
 import MakeMenu from '../utils/MakeMenu';
 import MakeAsyncComponent from '../utils/bundle';
 
+const AsyncRedBike = MakeAsyncComponent(RedBike);
 const testData = [
   {
     content: 'nanfang',
@@ -48,7 +49,7 @@ const Bike = function Bike(props) {
       <Link to={`${url}/redBike`}>clikck here, go to redBike</Link>
       {bike.number}
       <hr />
-      <Route path={`${url}/redBike`} component={MakeAsyncComponent(RedBike)} />
+      <Route path={`${url}/redBike`} component={AsyncRedBike} />
     </div>
   );
 };
