@@ -9,9 +9,6 @@ class Football extends React.Component {
     };
     this.addNumber = this.addNumber.bind(this);
   }
-  componentWillMount() {
-    console.log('i will mount');
-  }
   addNumber() {
     let { number } = this.state;
     number += 1;

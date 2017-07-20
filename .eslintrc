@@ -14,5 +14,6 @@
       "no-underscore-dangle": 0,
       "react/prop-types": 0,
       "import/no-webpack-loader-syntax": 0,
+      "func-names": 0,
     }
 }
