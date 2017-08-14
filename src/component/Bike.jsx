@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import RedBike from 'bundle-loader?lazy!./RedBike';
 import MakeMenu from '../utils/MakeMenu';
 import MakeAsyncComponent from '../utils/bundle';
+import Basket from './Basket';
 
 const AsyncRedBike = MakeAsyncComponent(RedBike);
 const testData = [
@@ -45,6 +46,7 @@ const Bike = function Bike(props) {
   const { bike } = props;
   return (
     <div>
+      <Basket />
       {MakeMenu(testData)}
       <Link to={`${url}/redBike`}>clikck here, go to redBike</Link>
       {bike.number}
